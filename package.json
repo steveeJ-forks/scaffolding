@@ -11,6 +11,7 @@
   "bin": {
     "create": "./dist/app.js"
   },
+  "main": "./dist/app.js",
   "files": [
     "dist"
   ],
