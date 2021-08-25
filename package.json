@@ -7,7 +7,7 @@
   },
   "main": "dist/app.js",
   "bin": {
-    "create": "./dist/app.js"
+    "holochain/create": "./dist/app.js"
   },
   "repository": {
     "type": "git",
