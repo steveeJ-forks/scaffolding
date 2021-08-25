@@ -7,11 +7,11 @@
   },
   "main": "dist/app.js",
   "bin": {
-    "elijahmanor": "./dist/app.js"
+    "create": "./dist/app.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/elijahmanor/elijahmanor"
+    "url": "https://github.com/holochain/create"
   },
   "keywords": [
     "person",
