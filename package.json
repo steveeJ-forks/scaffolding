@@ -8,8 +8,8 @@
     "build": "rm -rf dist && webpack --config webpack.config.js",
     "publish-to-branch": "npm run build && chmod +x dist/app.js && gh-pages -d ./ -b build"
   },
-  "bin": "./dist/app.js",
-  "main": "dist/app.js",
+  "bin": "./index.js",
+  "main": "index.js",
   "files": [
     "dist"
   ],
