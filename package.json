@@ -5,9 +5,9 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "main": "index.js",
+  "main": "dist/index.js",
   "bin": {
-    "elijahmanor": "./index.js"
+    "elijahmanor": "./dist/index.js"
   },
   "repository": {
     "type": "git",
