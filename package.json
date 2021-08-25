@@ -1,14 +1,12 @@
 {
-  "name": "@holochain/creates",
+  "name": "@holochain/create",
   "version": "0.0.1",
   "description": "Contact Information about Elijah Manor",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
   "main": "dist/app.js",
-  "bin": {
-    "create": "./dist/app.js"
-  },
+  "bin": "./dist/app.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/holochain/create"
