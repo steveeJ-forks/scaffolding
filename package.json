@@ -1,7 +1,13 @@
 {
   "name": "@holochain/create",
   "version": "0.0.1",
-  "description": "Contact Information about Elijah Manor",
+  "description": "RAD tools for quickly scaffolding holochain apps",
+  "author": "guillem.cordoba@gmail.com",
+  "scripts": {
+    "start": "npm run build && concurrently \"webpack --config webpack.config.js --watch\" \"nodemon --config ./nodemon.config.json\" --raw",
+    "build": "rm -rf dist && webpack --config webpack.config.js",
+    "publish-to-branch": "npm run build && gh-pages -d ./ -b build"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -11,11 +17,6 @@
     "type": "git",
     "url": "https://github.com/holochain/create"
   },
-  "keywords": [
-    "person",
-    "contact"
-  ],
-  "author": "Elijah Manor",
   "license": "MIT",
   "dependencies": {
     "@mdi/font": "5.9.55",
