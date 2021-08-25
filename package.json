@@ -9,7 +9,7 @@
     "publish-to-branch": "npm run build && gh-pages -d ./ -b build"
   },
   "bin": {
-    "create-holochain-app": "./dist/app.js"
+    "create": "./dist/app.js"
   },
   "files": [
     "dist"
