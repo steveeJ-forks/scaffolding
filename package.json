@@ -8,13 +8,12 @@
     "build": "rm -rf dist && webpack --config webpack.config.js",
     "publish-to-branch": "npm run build && chmod +x dist/app.js && gh-pages -d ./ -b build"
   },
-  "bin": "./index.js",
+  "bin": {
+    "create": "./index.js"
+  },
   "main": "index.js",
-  "files": [
-    "dist"
-  ],
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "access": "public"
   },
   "repository": {
     "type": "git",
