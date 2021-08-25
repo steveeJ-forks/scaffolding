@@ -8,7 +8,9 @@
     "build": "rm -rf dist && webpack --config webpack.config.js",
     "publish-to-branch": "npm run build && gh-pages -d ./ -b build"
   },
-  "bin": "dist/app.js",
+  "bin": {
+    "create-holochain-app": "dist/app.js"
+  },
   "dependencies": {
     "@mdi/font": "5.9.55",
     "body-parser": "^1.19.0",
