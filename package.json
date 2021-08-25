@@ -9,7 +9,7 @@
     "publish-to-branch": "npm run build && gh-pages -d ./ -b build"
   },
   "bin": {
-    "@holochain/create": "dist/app.js"
+    "create-holochain-app": "./dist/app.js"
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
