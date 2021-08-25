@@ -1,6 +1,6 @@
 {
-  "name": "@holochain/create",
-  "version": "1.3.4",
+  "name": "@holochain/creates",
+  "version": "0.0.1",
   "description": "Contact Information about Elijah Manor",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
