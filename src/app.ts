@@ -9,7 +9,7 @@ import { ClientEvents, ClientEventType, ServerEvents } from '@holochain/create-t
 import { applyGeneratedChanges } from './events/apply-changes';
 
 dotenv.config();
-console.log('hi')
+
 const app = express();
 const server = http.createServer(app);
 

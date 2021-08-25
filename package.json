@@ -11,7 +11,7 @@
   "bin": {
     "create-holochain-app": "./dist/app.js"
   },
-  "main": "./dist/app.js",
+  "main": "dist/app.js",
   "files": [
     "dist"
   ],
