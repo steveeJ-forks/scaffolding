@@ -3,7 +3,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: './src/app.ts',
+  entry: './src/index.ts',
   target: 'node',
   mode: 'production',
   module: {
@@ -12,6 +12,15 @@ module.exports = {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.m?js$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
       },
     ],
   },
@@ -32,7 +41,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: '../../node_modules/@holochain/create-ui/dist',
+          from: '../../node_modules/@holochain/scaffolding-ui/dist',
           to: './public/',
         },
       ],
