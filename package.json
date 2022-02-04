@@ -3,7 +3,8 @@
   "private": true,
   "version": "0.0.1",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "patcher/*"
   ],
   "scripts": {
     "start": "concurrently -k \"yarn workspace @holochain/rad-definitions run build:watch\" \"yarn workspace @holochain/rad-generators run build:watch\" \"yarn workspace @holochain/rad-elements run build:watch\" \"yarn workspace @holochain/scaffolding-events run build:watch\" \"yarn workspace @holochain/scaffolding-ui run build:watch\" \"yarn workspace @holochain/create run start\"",
