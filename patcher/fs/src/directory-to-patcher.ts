@@ -49,9 +49,6 @@ export function filePatcher(
 ): [PatcherFile, string[]] {
   const existingLiterals = Object.keys(templateLiterals).filter(t => file.content.includes(t));
 
-  if (file.content.includes('`')) {
-    console.log(file.content, escapeTemplateLiteral(file.content));
-  }
   let content = escapeTemplateLiteral(file.content);
 
   for (const literal of existingLiterals) {
