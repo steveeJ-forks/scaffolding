@@ -9,7 +9,7 @@
     "start": "tsc -w",
     "build": "rimraf dist *.tsbuildinfo && tsc",
     "build:watch": "tsc -w --preserveWatchOutput",
-    "test": "npm run build && node --loader ts-node/esm --experimental-specifier-resolution=node tests/index.ts | tap-diff"
+    "test": "npm run build && rimraf tests/.fixture tests/.patcher && node --loader ts-node/esm --experimental-specifier-resolution=node tests/index.ts | tap-diff"
   },
   "dependencies": {
     "@patcher/types": "0.0.1",

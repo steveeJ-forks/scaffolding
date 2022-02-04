@@ -1,10 +1,10 @@
-import { Directory, FsNode } from '@patcher/types';
+import { PatcherDirectory, PatcherNode } from '@patcher/types';
 import { readdirSync, existsSync, readFileSync } from 'fs';
 import ignore, { Ignore } from 'ignore';
 import cloneDeep from 'lodash-es/cloneDeep';
-import { isDirectory } from 'utils';
+import { isDirectory } from './utils';
 
-export function readFolder(path: string, ignoreManager: Ignore = ignore()): Directory {
+export function readFolder(path: string, ignoreManager: Ignore = ignore()): PatcherDirectory {
   if (existsSync('.gitignore')) {
     ignoreManager.add(readFileSync('.gitignore').toString());
   }
@@ -13,8 +13,8 @@ export function readFolder(path: string, ignoreManager: Ignore = ignore()): Dire
 
   const filteredPaths = ignoreManager.filter(paths);
 
-  const directory: Directory = {
-    type: FsNode.Directory,
+  const directory: PatcherDirectory = {
+    type: PatcherNode.Directory,
     children: {},
   };
 
@@ -28,7 +28,7 @@ export function readFolder(path: string, ignoreManager: Ignore = ignore()): Dire
       const content = readFileSync(fullPath, 'utf8');
 
       directory.children[childPath] = {
-        type: FsNode.File,
+        type: PatcherNode.File,
         content,
       };
     }

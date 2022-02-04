@@ -1,18 +1,19 @@
-import { Directory, FsNode } from '@patcher/types';
-import { readdirSync, writeFileSync, mkdirSync, rmSync, rmdirSync } from 'fs';
+import { PatcherDirectory, PatcherNode } from '@patcher/types';
+import { readdirSync, writeFileSync, mkdirSync, existsSync, rmSync, rmdirSync } from 'fs';
 import { isDirectory } from './utils';
 
-export function applyPatch(sourcePath: string, targetFs: Directory): void {
+export function applyPatch(sourcePath: string, targetFs: PatcherDirectory): void {
+  if (!existsSync(sourcePath)) {
+    mkdirSync(sourcePath);
+  }
+
   const paths = readdirSync(sourcePath);
 
+  // Create and overwrite dirs and files
   for (const [childPath, child] of Object.entries(targetFs.children)) {
     const fullChildPath = `${sourcePath}/${childPath}`;
 
-    if (child.type === FsNode.Directory) {
-      if (!paths.includes(childPath)) {
-        mkdirSync(fullChildPath);
-      }
-
+    if (child.type === PatcherNode.Directory) {
       applyPatch(fullChildPath, child);
     } else {
       writeFileSync(fullChildPath, child.content);

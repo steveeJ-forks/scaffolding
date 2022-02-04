@@ -1,17 +1,17 @@
 export type Dictionary<T> = { [name: string]: T };
 
-export enum FsNode {
+export enum PatcherNode {
   Directory,
   File,
 }
 
-export interface Directory {
-  type: FsNode.Directory;
-  children: Dictionary<Directory | File>;
+export interface PatcherDirectory {
+  type: PatcherNode.Directory;
+  children: Dictionary<PatcherDirectory | PatcherFile>;
 }
 
-export interface File {
-  type: FsNode.File;
+export interface PatcherFile {
+  type: PatcherNode.File;
 
   content: string;
 }
