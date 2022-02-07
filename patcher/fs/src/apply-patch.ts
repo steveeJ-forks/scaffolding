@@ -1,4 +1,4 @@
-import { PatcherDirectory, PatcherNode } from '@patcher/types';
+import { PatcherDirectory, PatcherNodeType } from '@patcher/types';
 import { readdirSync, writeFileSync, mkdirSync, existsSync, rmSync, rmdirSync } from 'fs';
 import { isDirectory } from './utils';
 
@@ -13,7 +13,7 @@ export function applyPatch(sourcePath: string, targetFs: PatcherDirectory): void
   for (const [childPath, child] of Object.entries(targetFs.children)) {
     const fullChildPath = `${sourcePath}/${childPath}`;
 
-    if (child.type === PatcherNode.Directory) {
+    if (child.type === PatcherNodeType.Directory) {
       applyPatch(fullChildPath, child);
     } else {
       writeFileSync(fullChildPath, child.content);

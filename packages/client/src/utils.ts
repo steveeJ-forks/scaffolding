@@ -1,5 +1,5 @@
 import { HappDefinition } from '@holochain/rad-definitions';
-import { FileChanges, FileChangesType, createHandlerFnName } from '@holochain/rad-generators';
+import { FileChanges, FileChangesType, createHandlerFnName } from '@holochain/rad-patcher';
 import JSZip, { JSZipObject } from 'jszip';
 
 //@ts-ignore
@@ -7,7 +7,6 @@ import JSZipUtils from 'jszip-utils';
 
 export function getUiTemplate(
   uiTemplate: string,
-
   textModifier: (text: string) => string,
 ): Promise<FileChanges[]> {
   return new Promise((resolve, reject) => {

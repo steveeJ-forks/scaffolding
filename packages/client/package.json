@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@holochain/rad-elements": "^0.0.1",
-    "@holochain/rad-generators": "^0.0.1",
+    "@holochain/rad-patcher": "^0.0.1",
     "@holochain/scaffolding-events": "^0.0.1",
     "@justinribeiro/code-block": "^1.0.0",
     "@material/mwc-button": "^0.25.3",

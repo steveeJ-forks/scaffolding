@@ -1,4 +1,4 @@
-import { Dictionary, PatcherDirectory, PatcherFile, PatcherNode } from '@patcher/types';
+import { Dictionary, PatcherDirectory, PatcherFile, PatcherNodeType } from '@patcher/types';
 import camelCase from 'lodash-es/camelCase';
 import uniq from 'lodash-es/uniq';
 import flatten from 'lodash-es/flatten';
@@ -17,14 +17,14 @@ function innerDirectoryToPatcher(
   templateLiterals: Dictionary<string>,
 ): [PatcherDirectory, string[]] {
   const patcher: PatcherDirectory = {
-    type: PatcherNode.Directory,
+    type: PatcherNodeType.Directory,
     children: {},
   };
 
   const literalsInFile: Dictionary<string[]> = {};
 
   for (const [childPath, child] of Object.entries(directory.children)) {
-    if (child.type === PatcherNode.Directory) {
+    if (child.type === PatcherNodeType.Directory) {
       const [p, literals] = innerDirectoryToPatcher(child, templateLiterals);
       patcher.children[camelCase(childPath)] = p;
       literalsInFile[childPath] = literals;
@@ -59,7 +59,7 @@ export function filePatcher(
 
   return [
     {
-      type: PatcherNode.File,
+      type: PatcherNodeType.File,
       content: `export const ${camelCase(name)} = (${literalsParametersDef(varLiterals)}) => \`${content}\`
     `,
     },
@@ -71,20 +71,20 @@ function dirPatcher(directory: PatcherDirectory, literalsInFile: Dictionary<stri
   const allLiterals = uniq(flatten(Object.values(literalsInFile)));
 
   return {
-    type: PatcherNode.File,
-    content: `import { PatcherNode } from '@patcher/type'; 
+    type: PatcherNodeType.File,
+    content: `import { PatcherNodeType } from '@patcher/type'; 
 
 ${Object.entries(directory.children)
   .map(
     ([childPath, child]) =>
       `import ${
-        child.type === PatcherNode.File ? `{ ${camelCase(childPath)} }` : camelCase(childPath)
+        child.type === PatcherNodeType.File ? `{ ${camelCase(childPath)} }` : camelCase(childPath)
       } from './${camelCase(childPath)}';`,
   )
   .join('\n')}  
 
 export default (${literalsParametersDef(allLiterals)}) => ({
-  type: PatcherNode.Directory,
+  type: PatcherNodeType.Directory,
   children: {
   ${Object.keys(directory.children)
     .map(child => `'${child}': ${camelCase(child)}(${passParameters(literalsInFile[child])})`)

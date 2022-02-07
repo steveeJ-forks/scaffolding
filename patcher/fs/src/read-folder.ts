@@ -1,4 +1,4 @@
-import { PatcherDirectory, PatcherNode } from '@patcher/types';
+import { PatcherDirectory, PatcherNodeType } from '@patcher/types';
 import { readdirSync, existsSync, readFileSync } from 'fs';
 import ignore, { Ignore } from 'ignore';
 import cloneDeep from 'lodash-es/cloneDeep';
@@ -14,7 +14,7 @@ export function readFolder(path: string, ignoreManager: Ignore = ignore()): Patc
   const filteredPaths = ignoreManager.filter(paths);
 
   const directory: PatcherDirectory = {
-    type: PatcherNode.Directory,
+    type: PatcherNodeType.Directory,
     children: {},
   };
 
@@ -28,7 +28,7 @@ export function readFolder(path: string, ignoreManager: Ignore = ignore()): Patc
       const content = readFileSync(fullPath, 'utf8');
 
       directory.children[childPath] = {
-        type: PatcherNode.File,
+        type: PatcherNodeType.File,
         content,
       };
     }
