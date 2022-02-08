@@ -1,11 +1,11 @@
-import { AppWebsocket, InstalledAppInfo } from '@holochain/conductor-api';
+export const holochainTs = () => `import { AppWebsocket, InstalledAppInfo } from '@holochain/client';
 
 let _appWebsocket: AppWebsocket | undefined;
 
 export async function appWebsocket() {
   if (_appWebsocket) return _appWebsocket;
 
-  _appWebsocket = await AppWebsocket.connect(`ws://localhost:${process.env.VUE_APP_HC_PORT}`);
+  _appWebsocket = await AppWebsocket.connect(\`ws://localhost:\${process.env.VUE_APP_HC_PORT}\`);
   return _appWebsocket;
 }
 
@@ -16,8 +16,10 @@ export async function appInfo() {
   const appWs = await appWebsocket();
 
   _appInfo = await appWs.appInfo({
-    installed_app_id: 'HC_SCAFFOLDING{installedAppId}',
+    installed_app_id: 'test-app',
   });
 
   return _appInfo;
 }
+`
+    

@@ -1,25 +1,24 @@
 {
-  "name": "@patcher/fs",
+  "name": "@patcher/vue",
   "version": "0.0.1",
   "description": "Common types for the client and the server to communicate with each other",
   "author": "guillem.cordoba@gmail.com",
-  "main": "dist/index.js",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
+    "generate": "rimraf src/app && node --es-module-specifier-resolution=node index.mjs",
     "start": "tsc -w",
-    "build": "rimraf dist *.tsbuildinfo && tsc",
+    "build": "rimraf dist && tsc",
     "build:watch": "tsc -w --preserveWatchOutput",
-    "test": "npm run build && rimraf tests/.fixture tests/.patcher && node --loader ts-node/esm --experimental-specifier-resolution=node tests/index.ts | tap-diff"
+    "test": "npm run build && rimraf tests/.fixture && node --loader ts-node/esm --experimental-specifier-resolution=node tests/index.ts | tap-diff && cd tests/.fixture && npm install && npm run build"
   },
   "dependencies": {
     "@patcher/types": "0.0.1",
-    "ignore": "^5.2.0",
-    "lodash-es": "^4.17.21",
-    "to-js-identifier": "^1.0.0"
+    "@patcher/web-apps": "0.0.1"
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.5",
+    "@holochain/rad-patcher": "0.0.1",
+    "@patcher/fs": "0.0.1",
     "rimraf": "^3.0.2",
     "tape": "^5.5.0",
     "ts-node": "^10.4.0",

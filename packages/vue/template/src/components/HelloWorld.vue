@@ -76,7 +76,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import type { InstalledCell } from '@holochain/conductor-api';
+import type { InstalledCell } from '@holochain/client';
 import { appInfo, appWebsocket } from '../store/holochain';
 
 export default defineComponent({
@@ -91,18 +91,18 @@ export default defineComponent({
   },
   async mounted() {
     const info = await appInfo();
-    const cellData = info.cell_data.find(data => data.role_id === 'HC_SCAFFOLDING{dnaName}') as InstalledCell;
+    const cellData = info.cell_data.find(data => data.role_id === 'my-cell-role') as InstalledCell;
 
     const appWs = await appWebsocket();
     const result = await appWs.callZome({
       cap: null,
       cell_id: cellData.cell_id,
-      zome_name: 'HC_SCAFFOLDING{zomeName}',
-      fn_name: 'HC_SCAFFOLDING{fnName}',
-      payload: HC_SCAFFOLDING{entrySample},
+      zome_name: 'zome-name',
+      fn_name: 'fn-name',
+      payload: { my: 'sample-payload' },
       provenance: cellData.cell_id[1],
     });
-    this.entryHash = result.entry_hash
+    this.entryHash = result.entry_hash;
   },
 });
 </script>

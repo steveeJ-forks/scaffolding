@@ -90,7 +90,7 @@ import AppDefinitionBuilder from './AppDefinitionBuilder.vue';
 import FileNode from './FileNode.vue';
 import { getFirstEntry, getUiTemplate, replaceText } from '../utils';
 import type { Dialog } from '@material/mwc-dialog';
-import { PatcherDirectory, PatcherNodeType } from '@patcher/types';
+import { PatcherDirectory, PatcherNodeType, PatcherNode } from '@patcher/types';
 
 export default defineComponent({
   name: 'Scaffold',
@@ -101,7 +101,7 @@ export default defineComponent({
   data(): {
     settingUp: boolean;
     currentDir: string | undefined;
-    happDir: PatcherDirectory;
+    happDir: PatcherDirectory | undefined;
     happName: string | undefined;
     selectedPreviewFileContents: string | undefined;
   } {
@@ -120,7 +120,7 @@ export default defineComponent({
     sortedFiles() {
       return (
         this.happDir &&
-        Object.entries(this.happDir.children).sort(([_, node1]: [string, PatcherNode], ([_, node2]: [string, PatcherNode]) => {
+        Object.entries(this.happDir.children).sort(([_, node1]: [string, PatcherNode], [__, node2]: [string, PatcherNode]) => {
           if (node1.type === PatcherNodeType.Directory) return -1;
           if (node2.type === PatcherNodeType.Directory) return 1;
           return -1;
@@ -155,6 +155,10 @@ export default defineComponent({
         toReplace['entrySample'] = JSON.stringify(firstCreateCall.sample, null, 2);
         toReplace['zomeName'] = firstCreateCall.zomeName;
         toReplace['entryDefName'] = firstCreateCall.entryDefName;
+      }
+
+      if (uiTemplate === 'Vue') {
+        
       }
 
       const uiTemplateChanges = await getUiTemplate(uiTemplate, text => replaceText(text, toReplace));

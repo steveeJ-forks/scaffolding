@@ -10116,6 +10116,11 @@ requires-port@^1.0.0:
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
 
+reserved@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/reserved/-/reserved-0.1.2.tgz#707b1246a3269f755da7cfcf9af6f4983bef105c"
+  integrity sha1-cHsSRqMmn3Vdp8/Pmvb0mDvvEFw=
+
 resolve-cwd@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/resolve-cwd/-/resolve-cwd-2.0.0.tgz#00a9f7387556e27038eae232caa372a6a59b665a"
@@ -11356,6 +11361,13 @@ to-fast-properties@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-2.0.0.tgz#dc5e698cbd079265bc73e0377681a4e4e83f616e"
   integrity sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=
+
+to-js-identifier@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/to-js-identifier/-/to-js-identifier-1.0.0.tgz#44c96e05dbc7f1c50d54d8efe0b7ffe290adaf5f"
+  integrity sha1-RMluBdvH8cUNVNjv4Lf/4pCtr18=
+  dependencies:
+    reserved "^0.1.2"
 
 to-json-schema@^0.2.5:
   version "0.2.5"

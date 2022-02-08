@@ -1,5 +1,3 @@
-export type Dictionary<T> = { [name: string]: T };
-
 export enum PatcherNodeType {
   Directory,
   File,
@@ -7,7 +5,7 @@ export enum PatcherNodeType {
 
 export interface PatcherDirectory {
   type: PatcherNodeType.Directory;
-  children: Dictionary<PatcherDirectory | PatcherFile>;
+  children: Record<string, PatcherDirectory | PatcherFile>;
 }
 
 export interface PatcherFile {
