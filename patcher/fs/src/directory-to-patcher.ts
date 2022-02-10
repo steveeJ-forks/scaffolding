@@ -1,4 +1,4 @@
-import { Dictionary, PatcherDirectory, PatcherFile, PatcherNodeType } from '@patcher/types';
+import { PatcherDirectory, PatcherFile, PatcherNodeType } from '@patcher/types';
 import camelCase from 'lodash-es/camelCase';
 import uniq from 'lodash-es/uniq';
 import flatten from 'lodash-es/flatten';
@@ -8,7 +8,7 @@ import { escapeTemplateLiteral, replaceAll } from './utils';
 
 export function directoryToPatcher(
   directory: PatcherDirectory,
-  templateLiterals: Dictionary<string>,
+  templateLiterals: Record<string, string>,
 ): PatcherDirectory {
   const [d, _] = innerDirectoryToPatcher(directory, templateLiterals);
   return d;
@@ -16,14 +16,14 @@ export function directoryToPatcher(
 
 function innerDirectoryToPatcher(
   directory: PatcherDirectory,
-  templateLiterals: Dictionary<string>,
+  templateLiterals: Record<string, string>,
 ): [PatcherDirectory, string[]] {
   const patcher: PatcherDirectory = {
     type: PatcherNodeType.Directory,
     children: {},
   };
 
-  const literalsInFile: Dictionary<string[]> = {};
+  const literalsInFile: Record<string, string[]> = {};
 
   for (const [childPath, child] of Object.entries(directory.children)) {
     if (child.type === PatcherNodeType.Directory) {
@@ -47,7 +47,7 @@ function innerDirectoryToPatcher(
 export function filePatcher(
   name: string,
   file: PatcherFile,
-  templateLiterals: Dictionary<string>,
+  templateLiterals: Record<string, string>,
 ): [PatcherFile, string[]] {
   const existingLiterals = Object.keys(templateLiterals).filter(t => file.content.includes(t));
 
@@ -74,7 +74,7 @@ export const ${toId(camelCase(name))} = (${literalsParametersDef(varLiterals)}):
   ];
 }
 
-function dirPatcher(directory: PatcherDirectory, literalsInFile: Dictionary<string[]>): PatcherFile {
+function dirPatcher(directory: PatcherDirectory, literalsInFile: Record<string, string[]>): PatcherFile {
   const allLiterals = uniq(flatten(Object.values(literalsInFile)));
 
   return {

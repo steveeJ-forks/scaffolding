@@ -1,10 +1,10 @@
 import { DnaDefinition, HappDefinition } from '@holochain/rad-definitions';
-import { Dictionary, PatcherDirectory, PatcherFile, PatcherNodeType } from '@patcher/types';
+import { PatcherDirectory, PatcherFile, PatcherNodeType } from '@patcher/types';
 
 import { tsTypesForZome } from './types';
 
 export async function generateTsTypes(happ: HappDefinition): Promise<PatcherDirectory> {
-  const types: Dictionary<PatcherDirectory> = {};
+  const types: Record<string, PatcherDirectory> = {};
   for (const dna of happ.dnas) {
     const dir = await generateTsTypesForDna(dna);
     types[dna.name] = dir;
@@ -17,7 +17,7 @@ export async function generateTsTypes(happ: HappDefinition): Promise<PatcherDire
 }
 
 export async function generateTsTypesForDna(dna: DnaDefinition): Promise<PatcherDirectory> {
-  const files: Dictionary<PatcherFile> = {};
+  const files: Record<string, PatcherFile> = {};
 
   for (const zome of dna.zomes) {
     const file: PatcherFile = {

@@ -9,7 +9,6 @@ import fs from 'fs';
 
 import { ClientEventType } from '@holochain/scaffolding-events';
 import { applyPatch } from '@patcher/fs';
-import { applyGeneratedChanges } from './events/apply-changes';
 import { automaticSetup } from './events/automatic-setup';
 
 export async function launchApp() {

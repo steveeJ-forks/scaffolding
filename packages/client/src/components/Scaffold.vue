@@ -88,9 +88,10 @@ import { webHapp } from '@holochain/rad-patcher';
 import { HappDefinition } from '@holochain/rad-definitions';
 import AppDefinitionBuilder from './AppDefinitionBuilder.vue';
 import FileNode from './FileNode.vue';
-import { getFirstEntry, getUiTemplate, replaceText } from '../utils';
+import { getFirstEntry } from '../utils';
 import type { Dialog } from '@material/mwc-dialog';
 import { PatcherDirectory, PatcherNodeType, PatcherNode } from '@patcher/types';
+import { generateVueApp } from '@patcher/vue';
 
 export default defineComponent({
   name: 'Scaffold',
@@ -144,6 +145,12 @@ export default defineComponent({
     async generateFileChanges({ happ, uiTemplate }: { happ: HappDefinition; uiTemplate: string }) {
       const firstCreateCall = getFirstEntry(happ);
 
+      let dir = undefined;
+      if (uiTemplate === 'Vue') {
+        dir = generateVueApp();
+        
+      }
+
       const toReplace: any = {
         installedAppId: happ.name,
         zomeName: happ.dnas[0].zomes[0].name,
@@ -157,13 +164,7 @@ export default defineComponent({
         toReplace['entryDefName'] = firstCreateCall.entryDefName;
       }
 
-      if (uiTemplate === 'Vue') {
-        
-      }
-
-      const uiTemplateChanges = await getUiTemplate(uiTemplate, text => replaceText(text, toReplace));
-
-      this.happDir = await webHapp(happ, uiTemplateChanges);
+      this.happDir = await webHapp(happ, dir as PatcherDirectory);
       this.happName = happ.name;
       (this.$refs.dialog as Dialog).show();
     },
